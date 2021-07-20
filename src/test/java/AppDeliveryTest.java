@@ -1,5 +1,3 @@
-package ru.netology.cardDelivery;
-
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

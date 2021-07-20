@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -25,6 +26,7 @@ public class AppDeliveryTest {
     @AfterEach
     void setUp() {
         open("http://localhost:9999/");
+
     }
 
     @Test

@@ -19,11 +19,6 @@ public class AppDeliveryTest {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern(format));
     }
 
-    // This is logic for delete string value
-    public String delete() {
-        return Keys.chord(Keys.CONTROL, "a") + Keys.DELETE;
-    }
-
     @BeforeEach
     void setUp() {
         open("http://localhost:9999/");
@@ -36,12 +31,10 @@ public class AppDeliveryTest {
 
 //      Test configuration
         String meetDate = date(3, "dd.MM.yyyy");
-        String deleteString = delete();
-
 //      Test data
         $("[data-test-id='city'] .input__box .input__control[placeholder='Город']").setValue("Уфа");
         $("[data-test-id='date'] .input__box .input__control[placeholder='Дата встречи']")
-                .setValue(deleteString);
+                .doubleClick().sendKeys(Keys.chord(Keys.BACK_SPACE));
         $("[data-test-id='date'] .input__box .input__control[placeholder='Дата встречи']")
                 .setValue(String.valueOf(meetDate));
         $("[data-test-id='name'] .input__box .input__control[name='name']").setValue("Семенов Андрей");
@@ -59,15 +52,17 @@ public class AppDeliveryTest {
     void shouldReservedMeetThroughSevenDays() {
 
 //        Test config
-        String meetDate = date(7, "dd");
+        String meetDate = date(7, "d");
         String fullMeetDate = date(7, "dd.MM.yyyy");
 
 //        Test data
         $("[data-test-id='city'] .input__box .input__control[placeholder='Город']").setValue("Кр");
         $(byText("Красноярск")).click();
+        $("[data-test-id='date'] .input__box .input__control[placeholder='Дата встречи']")
+                .doubleClick().sendKeys(Keys.chord(Keys.BACK_SPACE));
         $("[role ='button'] .icon-button__content .icon-button__text").click();
-//      $("[data-step='1']").click(); // Кнопка смены месяца
-        $(byText(meetDate)).click();
+        $("[data-step='1']").click(); // Кнопка смены месяца
+        $("table[class='calendar__layout']").find(byText(meetDate)).click();
         $("[data-test-id='name'] .input__box .input__control[name='name']").setValue("Семенов Андрей");
         $("[data-test-id='phone'] .input__box .input__control[name='phone']").setValue("+12345678901");
         $("[data-test-id='agreement'] .checkbox__box").click();

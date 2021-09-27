@@ -66,7 +66,7 @@ public class AppDeliveryTest {
         $("[data-test-id='city'] .input__box .input__control[placeholder='Город']").setValue("Кр");
         $(byText("Красноярск")).click();
         $("[role ='button'] .icon-button__content .icon-button__text").click();
-        $("[data-step='1']").click(); // Кнопка смены месяца
+//      $("[data-step='1']").click(); // Кнопка смены месяца
         $(byText(meetDate)).click();
         $("[data-test-id='name'] .input__box .input__control[name='name']").setValue("Семенов Андрей");
         $("[data-test-id='phone'] .input__box .input__control[name='phone']").setValue("+12345678901");

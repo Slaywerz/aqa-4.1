@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,22 +60,22 @@ public class AppDeliveryTest {
 
 //        Test config
         String meetDate = date(7, "dd");
-        String fullMeetDate = date(7,"dd.MM.yyyy");
+        String fullMeetDate = date(7, "dd.MM.yyyy");
 
 //        Test data
         $("[data-test-id='city'] .input__box .input__control[placeholder='Город']").setValue("Кр");
         $(byText("Красноярск")).click();
         $("[role ='button'] .icon-button__content .icon-button__text").click();
-//        SelenideElement dataStep = $("[data-step='1']");
-//        SelenideElement calendarDate = $(byText(meetDate)).shouldBe(Condition.disabled);
+        $("[data-step='1']").click(); // Кнопка смены месяца
         $(byText(meetDate)).click();
         $("[data-test-id='name'] .input__box .input__control[name='name']").setValue("Семенов Андрей");
         $("[data-test-id='phone'] .input__box .input__control[name='phone']").setValue("+12345678901");
         $("[data-test-id='agreement'] .checkbox__box").click();
+
         $(byText("Забронировать")).click();
         $("[data-test-id='notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
         $(byText("Успешно!")).shouldBe(Condition.visible);
         $("[data-test-id='notification'] .notification__content").shouldHave
-                                                        (Condition.text("Встреча успешно забронирована на " + fullMeetDate));
+                (Condition.text("Встреча успешно забронирована на " + fullMeetDate));
     }
 }
